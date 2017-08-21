@@ -7,7 +7,7 @@ Class("CheckBox") ({
 			s:changeState()
 		end)
 	end,
-	["number"] =16,
+
 	["size"] = {100, 100},
 	["checked"] = false,
 	
@@ -21,7 +21,7 @@ Class("CheckBox") ({
 		if s.checked then	
 			love.graphics.setColor(0,0,0,255)
 			love.graphics.draw(GUIGraphics["Check"],s.position[1],s.position[2],0,s.size[1]/32,s.size[2]/32)
-			
+			print("Hello")	
 		end
 	end,
 	

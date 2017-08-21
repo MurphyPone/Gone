@@ -19,7 +19,7 @@ function bullets_update(dt)
   end
 
 
-  if (love.math.random(1, player.rate) == 1) then
+  if (love.math.random(1,player.rate) == 1) then
     bullets_shoot()
   end 
 end 

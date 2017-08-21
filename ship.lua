@@ -1,5 +1,4 @@
 require("enemies")
-require("shop")
 
 --Have to re-declare bc fml
 screenWidth = love.graphics.getWidth()
@@ -22,7 +21,7 @@ function Ship:new()
 		score = 0,
 		fireImg = love.graphics.newImage("img/fire/sheey.png"),
 
-		rate= 16
+		rate = 16
 
 	}
 
@@ -79,6 +78,7 @@ function Ship:isHit()	--Checks collision with enemies
 	for i = 1, #enemies do 
 		if CheckCollision(p.xPos, p.yPos, p.width, p.height, enemies[i].xPos,enemies[i].yPos, enemies[i].width, enemies[i].width) then 
 			print("gameover")
+			bg.n=1
 			gamestate = "deathscreen"
 		end 
 	end 

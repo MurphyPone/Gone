@@ -41,7 +41,7 @@ function BG:draw()
 	--love.graphics.draw(drawable, x, y, r, sx, sy, ox, oy, kx, ky)
 	love.graphics.draw(bg.img, 0, bg.yPos, 0, 1, 1, 0, 4434)  --DOUBLE CHECK AT 6:30  --10202 for old way
 	love.graphics.setColor(255,255,255, bg.clearOpacity)
-	love.graphics.draw(lvl, 10, screenHeight/5)
+	love.graphics.draw(lvl, screenWidth/10, screenHeight/5, 0, resMod, resMod)
 	love.graphics.setColor(255,255,255)
 end
 

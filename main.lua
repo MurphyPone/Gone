@@ -8,7 +8,8 @@ require("enemies")
 require("shop")
 require("Class")
 require("GUIElements/GUIMain")
-
+require("gamestate")
+    ----- at 0.5 is the best example of what it will look like on an iphone
 
 function love.load() 
 	player = Ship:new()
@@ -17,6 +18,7 @@ function love.load()
 	background = BG:new()
 	bullets_load()
 	shop_load()
+    gamestate_load()
 
 	--Spawn lots of eneemies 
 	for i = 1,12 do 
@@ -28,7 +30,7 @@ function love.load()
 	screenHeight = love.graphics.getHeight()
 
 	--Small assets
-	go = love.graphics.newImage("img/game over.png")
+	--[[go = love.graphics.newImage("img/game over.png")
 	win = love.graphics.newImage("img/you win .png")
 	lvl = love.graphics.newImage("img/level cleared.png")
 	title = love.graphics.newImage("img/Title.png")
@@ -36,7 +38,7 @@ function love.load()
 
 	button = {
 		img = love.graphics.newImage("img/play.png"),
-		x = screenWidth/2 -300,
+		x = screenWidth/8,
 		y = screenHeight/2,
 		width = 573,
 		height = 68
@@ -50,27 +52,28 @@ function love.load()
 		height = 74
 	}
 
-	gamestate = "title"
+	gamestate = "title"--]]
 end 
 
 function love.update(dt)
-	if gamestate == "playing" then 
+	--[[if gamestate == "playing" then 
 		player:update(dt)
 		fire:update(dt)
 		background:update(dt)
 		myScore:update(dt)
 		bullets_update(dt)
-
+        
 		for i = 1,#enemies do 
 			enemies[i]:update(dt)
 		end 
 	elseif gamestate == "shop" then 
-		shop_update(dt)
-	end 
+		shop_update()
+	end --]]
+ gamestate_update(dt)
 end
 
 function love.draw()
-	if gamestate == "playing" then 
+	--[[if gamestate == "playing" then 
 		love.graphics.setBackgroundColor(200,200,200)
 		background:draw()
 		fire:draw()
@@ -85,7 +88,9 @@ function love.draw()
 	elseif gamestate == "deathscreen" then 
 		background:draw()
 		myScore:draw()
-		love.graphics.draw(button.img, button.x, button.y)
+		bg.n=1
+		
+		love.graphics.draw(button.img, button.x, button.y, 0, resMod, resMod)
 		if insideBox(love.mouse.getX(), love.mouse.getY(), button.x, button.y, button.width, button.height ) then
 			gamestate = "playing"
 			for i = 1,#enemies do 
@@ -94,13 +99,14 @@ function love.draw()
 			end
 		end
 
-		love.graphics.draw(go, 10, screenHeight/5)
+		love.graphics.draw(go, screenWidth/13, screenHeight/5, 0, resMod, resMod)
 	elseif gamestate == "win" then 
+		bg.n=1
 		love.graphics.setBackgroundColor(100,255,100)
 		love.graphics.draw(win, 10, screenHeight/5)
 		myScore:draw()
 
-		love.graphics.draw(button.img, button.x, button.y)
+		love.graphics.draw(button.img, button.x, button.y, 0, resMod, resMod)
 		if insideBox(love.mouse.getX(), love.mouse.getY(), button.x, button.y, button.width, button.height ) then
 			gamestate = "playing"
 			for i = 1,#enemies do 
@@ -110,7 +116,7 @@ function love.draw()
 		end
 	elseif gamestate == "title" then
 		love.graphics.draw(title)
-		love.graphics.draw(button.img, button.x, button.y)
+		love.graphics.draw(button.img, button.x, button.y, 0, resMod, resMod)
 		love.graphics.setBackgroundColor(200,200,200)
 		if insideBox(love.mouse.getX(), love.mouse.getY(), button.x, button.y, button.width, button.height ) then
 			gamestate = "playing"
@@ -125,7 +131,8 @@ function love.draw()
 	elseif gamestate == "shop" then 
 		shop_draw()		
 
-	end 
+	end ]]--
+	gamestate_draw()
 end 
 
 function love.mousepressed(x, y, button, istouch)
